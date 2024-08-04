@@ -6,9 +6,13 @@ dotenv.config()
 const city = process.argv[2]
 
 async function main() {
-    const data = await fetchWeatherData(city);
-    if (data) {
-        await processData(data);
+    if (city === undefined) {
+        console.log('Enter the name of the city')
+    } else {
+        const data = await fetchWeatherData(city);
+        if (data) {
+            await processData(data);
+        }
     }
 }
 
@@ -28,4 +32,4 @@ async function processData(data) {
     fs.writeFileSync('weather_data.json', jsonContent);
 }
 
-// main()
+main()
